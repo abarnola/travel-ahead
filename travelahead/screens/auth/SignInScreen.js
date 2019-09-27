@@ -2,7 +2,9 @@ import React from 'react';
 import {
   AsyncStorage,
   View,
-  Text
+  Text,
+  Button,
+  TextInput
 } from 'react-native';
 
 class SignInScreen extends React.Component {
@@ -21,7 +23,7 @@ class SignInScreen extends React.Component {
   
     _signInAsync = async () => {
       await AsyncStorage.setItem('userToken', 'abc');
-      this.props.navigation.navigate('App');
+      this.props.navigation.navigate('Home');
     };
 }
   

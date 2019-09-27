@@ -20,7 +20,7 @@ const AppNavigator = createSwitchNavigator(
     MainStack: MainNavigator
   },
   {
-    initialRouteName: 'MainStack'
+    initialRouteName: 'AuthLoading'
   }
 );
 

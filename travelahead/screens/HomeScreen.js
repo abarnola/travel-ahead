@@ -1,28 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button } from 'react-native'
-
-const StyledView = styled.View`
-  background-color: papayawhip;
-`
-
-const StyledText = styled.Text`
-  color: palevioletred;
-`
-
+import { Button, Text, View, AsyncStorage } from 'react-native'
 
 class HomeScreen extends React.Component {
+
   static navigationOptions = {
-    title: 'Welcome to the app!',
+    title: 'Welcome to our app Lenis!',
   };
 
   render() {
     return (
-      <StyledView>
-        <StyledText>Testing out some fake auth for now</StyledText>
+      <View>
+        <Text>Testing out some fake auth for now</Text>
         <Button title="Show me more of the app" onPress={this._showMoreApp} />
         <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
-      </StyledView>
+      </View>
     );
   }
 
@@ -32,7 +24,7 @@ class HomeScreen extends React.Component {
 
   _signOutAsync = async () => {
     await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
+    this.props.navigation.navigate('SignIn');
   };
 }
 
