@@ -12,3 +12,9 @@ export default {
     primaryFont: "'Lato', sans-serif",
     secondaryFont: "'Comfortaa', cursive"
 }
+
+//2EC4B6 teal
+//FDFFFC white
+//011627 navy
+//011627 mango
+//011627 red

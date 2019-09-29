@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button, Text, View, AsyncStorage } from 'react-native'
+import { Button, Text, View, AsyncStorage, SafeAreaView } from 'react-native'
 
 class HomeScreen extends React.Component {
 
@@ -10,11 +10,11 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <SafeAreaView>
         <Text>Testing out some fake auth for now</Text>
         <Button title="Show me more of the app" onPress={this._showMoreApp} />
         <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -23,7 +23,7 @@ class HomeScreen extends React.Component {
   };
 
   _signOutAsync = async () => {
-    await AsyncStorage.clear();
+    //await AsyncStorage.clear();
     this.props.navigation.navigate('SignIn');
   };
 }
