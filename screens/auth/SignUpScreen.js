@@ -5,8 +5,7 @@ import {
   Text,
   View,
   Dimensions,
-  KeyboardAvoidingView,
-  ScrollView
+  KeyboardAvoidingView
 } from 'react-native';
 import styled from 'styled-components';
 import { Button, InputItem } from '@ant-design/react-native';
@@ -27,19 +26,10 @@ const InnerContainer = styled.KeyboardAvoidingView`
   justify-content: space-around;
   background-color: #011627;
   color: white;
-  height: 85%;
-  max-height: 85%;
+  height: 75%;
+  max-height: 75%;
   width: auto;
 `;
-
-const Scroll = styled.ScrollView`
-  width: 100%;
-  height: 50%;
-  max-height: 50%;
-  flex: 1;
-  flex-direction: column;
-  `;
-
 const StyledButton = styled(Button)`
   width: 300px;
   border-radius: 10px;
@@ -63,32 +53,29 @@ const LinkText = styled.Text`
   font-size: 16px;
 `;
 
-class SignInScreen extends React.Component {
+class SignUpScreen extends React.Component {
   
     render() {
       return (
         <Container>
           <InnerContainer enabled behavior="padding">
           <View style={{ height: 150, width: 150, backgroundColor: 'white'}}></View>
-          <Scroll contentContainerStyle={{justifyContent: 'space-around', alignItems: 'center'}}>
             <StyledInput last={true} type="text" placeholder="Username"></StyledInput>
             <StyledInput last={true} type="password" placeholder="Password"></StyledInput>
-          </Scroll>
-          <StyledButton type="primary" onPress={this._signInAsync} >Sign In</StyledButton>
-          <LinkText onPress={this.goToSignUp}>Don't have an account? Sign up</LinkText>
+            <StyledInput last={true} type="password" placeholder="Confirm Password"></StyledInput>
+            <StyledButton type="primary" onPress={this._signInAsync} >Sign Up</StyledButton>
+          <LinkText onPress={this.goToSignIn}>Already have an account? Sign in</LinkText>
           </InnerContainer>
         </Container>
       );
     }
-
-    goToSignUp = async () => {
-      this.props.navigation.navigate('SignUp');
-    };
-
-    _signInAsync = async () => {
-      //await AsyncStorage.setItem('userToken', 'abc');
-      this.props.navigation.navigate('Home');
+    goToSignIn = async () => {
+        this.props.navigation.navigate('SignIn');
+    }
+    _signUpAsync = async () => {
+        //await AsyncStorage.setItem('userToken', 'abc');
+        this.props.navigation.navigate('SignIn');
     };
 }
   
-export default SignInScreen;
+export default SignUpScreen;

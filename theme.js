@@ -13,8 +13,8 @@ export default {
     secondaryFont: "'Comfortaa', cursive"
 }
 
-//2EC4B6 teal
+//F45130 ogre odor (orange)
+//F2AF29 urobilin  
+//B23125 firebrick
+//DEE5E5 platinum
 //FDFFFC white
-//011627 navy
-//011627 mango
-//011627 red
