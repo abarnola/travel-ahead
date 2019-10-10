@@ -6,6 +6,8 @@ import SignInScreen from '../screens/auth/SignInScreen'
 import SignUpScreen from '../screens/auth/SignUpScreen'
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen'
+import NotificationsScreen from '../screens/NotificationsScreen';
+import TripsScreen from '../screens/TripsScreen';
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs'
 
 
@@ -18,23 +20,29 @@ const SearchScreen = () => {
     </View>
   )
 }
-const ItineraryScreen = () => {
+const AddTripScreen = () => {
   return (
     <View>
-      <Text>Itinerary</Text>
+      <Text>AddTrip</Text>
     </View>
   )
 }
 //
 const TabScreens = createBottomTabNavigator({
+  Trips: {
+    screen: TripsScreen
+  },
   Search: {
     screen: SearchScreen
   },
-  Itinerary: {
-    screen: ItineraryScreen
+  AddTrip: {
+    screen: AddTripScreen
   },
   Profile: {
     screen: ProfileScreen
+  },
+  Notifications: {
+    screen: NotificationsScreen
   },
   Home: {
     screen: HomeScreen,
