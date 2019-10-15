@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { View, Text } from 'react-native';
+import { View, Text, Animated } from 'react-native';
 import { Card } from '@ant-design/react-native';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { RectButton } from 'react-native-gesture-handler'
 
 const NotificationContainer = styled.View`
     width: 100%;
@@ -24,6 +26,7 @@ const TextContainer = styled.View`
     flex: 1;
     flex-wrap: wrap;
     height: 100%;
+    z-index: 1000;
 `;
 
 const Notification = (props) => {
@@ -32,14 +35,37 @@ const Notification = (props) => {
 
         return;
     }
-    
+
+    renderRightActions = (progress, dragX) => {
+        const trans = dragX.interpolate({
+          inputRange: [0, 50, 100, 101],
+          outputRange: [-20, 0, 0, 1],
+        });
+        return (
+          <RectButton style={{ width: 'auto', height: 'auto', backgroundColor: 'blue'}} onPress={this.close}>
+            <Animated.Text
+              style={[
+                {
+                  transform: [{ translateX: trans }],
+                },
+              ]}>
+              Archive
+            </Animated.Text>
+          </RectButton>
+        );
+      };
+
     return (
+        <Swipeable renderRightActions={this.renderRightActions}>
         <NotificationContainer>
-            <View style={{backgroundColor: 'red', width: 35, height: 35, marginRight: 25}}></View>
-            <TextContainer>
-                <Text>{props.text}</Text>
-            </TextContainer>
-        </NotificationContainer>
+            
+                <View style={{backgroundColor: 'red', width: 35, height: 35, marginRight: 25}}></View>
+                <TextContainer>
+                    <Text>{props.text}</Text>
+                </TextContainer>
+           
+            </NotificationContainer>
+         </Swipeable>
       );
 }
 
