@@ -7,6 +7,9 @@ export default function App() {
   return (
   <ThemeProvider theme={Theme}>
       <AppNavigator
+        screenProps={{
+          theme: Theme
+        }}
         ref={navigatorRef => {
         this.navigator = navigatorRef;
         }}

@@ -10,11 +10,11 @@ export default {
     subText: "#",
     pageColor: "#",
     primaryFont: "'Lato', sans-serif",
-    secondaryFont: "'Comfortaa', cursive"
+    secondaryFont: "'Comfortaa', cursive",
+    hover: "#B9DFFA"
 }
 
-//F45130 ogre odor (orange)
-//F2AF29 urobilin  
-//B23125 firebrick
+//F4DC87
+//4BA0DD  
 //DEE5E5 platinum
 //FDFFFC white

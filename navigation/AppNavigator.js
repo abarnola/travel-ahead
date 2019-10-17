@@ -39,11 +39,12 @@ const SettingsScreen = () => {
 }
 //
 const BottomTabs = (props) => {
+  console.log(props);
   return (
     <BottomTabBar {...props} style={{ 
       borderTopLeftRadius: 10,
       borderTopRightRadius: 10,
-      backgroundColor: "#FFE8C4"
+      backgroundColor: props.theme.primaryColor
      }} />
   )
 }
@@ -63,37 +64,50 @@ const TabNavigator = createBottomTabNavigator({
   Profile: {
     screen: ProfileScreen
   },
-  Home: {
-    screen: HomeScreen,
-    title: 'Home'
-  }
 }, 
 {
-  tabBarComponent: props => (
+  initialRouteName: 'Trips',
+  /*tabBarComponent: (props) => (
     <BottomTabs {...props} ></BottomTabs>
-  ),
-  initialRouteName: 'Home',
+  ),*/
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state.routes[navigation.state.index];
     return {
-      headerTitle: routeName
+      headerTitle: routeName,
+    };
+  },
+  
+  defaultNavigationOptions: ({ navigation, screenProps }) => {
+    //console.log(screenProps)
+    return {
+      tabBarOptions: {
+        style: {
+          backgroundColor: screenProps.theme.primaryColor,
+        },
+      }
     };
   }
-  /*navigationOptions: {
-      drawerLabel: 'Drawer',
-      drawerIcon: ({ tintColor }) => (
-        <Text>Drawer!</Text>
-      ),
-     // headerTitle: <LogoTitle />,
-     headerTitle: <Text style={{color: 'black'}}>Header</Text>,
-      headerRight: (
-        <Button
-          onPress={() => alert('This is a button!')}
-          title="Test"
-          color="#aaa"
-        />
-      )
-    }*/
+ 
+  /*
+  transitionConfig: () => ({
+    screenInterpolator: (sceneProps) => {
+        const { layout, position, scene } = sceneProps;
+        const { index } = scene;
+
+        const width = layout.initWidth;
+        const translateX = position.interpolate({
+          inputRange: [index - 1, index, index + 1],
+          outputRange: [width, 0, 0],
+        });
+        console.log('transition')
+        const opacity = position.interpolate({
+          inputRange: [index - 1, index - 0.99, index],
+          outputRange: [0, 1, 1],
+        });
+
+        return { opacity, transform: [{ translateX }] };
+    }
+  }),*/
 });
 
 
@@ -102,7 +116,8 @@ const MainNavigator = createStackNavigator(
     Tabs: TabNavigator
   },
   {
-    defaultNavigationOptions: ({ navigation }) => {
+    defaultNavigationOptions: ({ navigation, screenProps }) => {
+      //console.log(screenProps)
       return {
         headerRight: (
           <Text
@@ -110,7 +125,13 @@ const MainNavigator = createStackNavigator(
             onPress={() => navigation.openDrawer()}>
             Side
           </Text>
-        )
+        ),
+        headerStyle: {
+          backgroundColor: screenProps.theme.primaryColor
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
       };
     }
   }

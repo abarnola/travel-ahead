@@ -8,7 +8,8 @@ import {
   ScrollView
 } from 'react-native';
 import styled from 'styled-components';
-import { Button, List, InputItem } from '@ant-design/react-native';
+import { List, InputItem } from '@ant-design/react-native';
+import CustomButton from '../components/CustomButton'
 
 const Container = styled.View`
   padding: 25px;
@@ -25,11 +26,7 @@ const InnerContainer = styled.ScrollView`
   max-height: 100%;
   width: auto;
 `;
-const StyledButton = styled(Button)`
-  width: 100px;
-  border-radius: 10px;
-  margin: 25px;
-`;
+
 
 const Avatar = styled.View`
     border-radius: 100px;
@@ -45,10 +42,6 @@ const Avatar = styled.View`
 class ProfileScreen extends React.Component {
   
     render() {
-      const screenWidth = Math.round(Dimensions.get('window').width);
-      const screenHeight = Math.round(Dimensions.get('window').height);
-      console.log(screenWidth, screenHeight);
-
       return (
         <Container>
             <InnerContainer contentContainerStyle={{alignItems: 'center', justifyContent: 'space-around'}}>
@@ -61,7 +54,7 @@ class ProfileScreen extends React.Component {
                 <InputItem type="text" placeholder="Input"></InputItem>
                 <InputItem type="text" placeholder="Input"></InputItem>
             </List>
-            <StyledButton type="primary" >Save</StyledButton>
+            <CustomButton>Text</CustomButton>
             </InnerContainer>
         </Container>
       );
