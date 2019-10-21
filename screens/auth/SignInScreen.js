@@ -6,7 +6,7 @@ import {
   View,
   Dimensions,
   KeyboardAvoidingView,
-  ScrollView
+  Platform
 } from 'react-native';
 import styled from 'styled-components';
 import CustomButton from '../../components/CustomButton';
@@ -21,11 +21,13 @@ const Container = styled.View`
   flex: 1;
   align-items: center;
 `;
-const FormContainer = styled.KeyboardAvoidingView`
+
+const FormContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
   width: 100%;
 `;
-
-
 
 const LinkText = styled.Text`
   text-decoration: underline;
@@ -41,10 +43,9 @@ class SignInScreen extends React.Component {
 
     render() {
       return (
-        <Container>
-
+        <Container enabled behavior={Platform.OS === "ios" ? "padding" : null}>
+          <FormContainer>
           <View style={{ height: 150, width: 150, margin: 10, backgroundColor: 'white'}}></View>
-          <FormContainer enabled={true} behavior="padding">
               <FormInput style={{ width: '100%'}} 
                 textContentType="none"
                 placeholder="Username"></FormInput>
@@ -52,10 +53,11 @@ class SignInScreen extends React.Component {
                 secureTextEntry={true} 
                 textContentType="password" 
                 placeholder="Password"></FormInput>
-            </FormContainer>
+           
             <CustomButton onPress={this._signInAsync} style={{ width: '100%'}}>Sign In</CustomButton>
             <LinkText onPress={this.goToSignUp}>Don't have an account? Sign up</LinkText>
-
+            <View style={{ flex : 1 }} />
+            </FormContainer>
         </Container>
       );
     }
