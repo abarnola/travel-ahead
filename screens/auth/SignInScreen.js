@@ -9,52 +9,23 @@ import {
   ScrollView
 } from 'react-native';
 import styled from 'styled-components';
-import { Button, InputItem } from '@ant-design/react-native';
+import CustomButton from '../../components/CustomButton';
+import FormInput from '../../components/FormInput';
 
 const Container = styled.View`
   padding: 25px;
   text-align: center;
   height: ${ Math.round(Dimensions.get('window').height)};
   width: ${ Math.round(Dimensions.get('window').width)};
-  background-color: #011627;
-  color: white;
-`;
-const InnerContainer = styled.KeyboardAvoidingView`
-  text-align: center;
+  background-color: ${props => props.theme.primaryColor};
   flex: 1;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  background-color: #011627;
-  color: white;
-  height: 85%;
-  max-height: 85%;
-  width: auto;
 `;
-
-const Scroll = styled.ScrollView`
+const FormContainer = styled.KeyboardAvoidingView`
   width: 100%;
-  height: 50%;
-  max-height: 50%;
-  flex: 1;
-  flex-direction: column;
-  `;
-
-const StyledButton = styled(Button)`
-  width: 300px;
-  border-radius: 10px;
-  margin: 25px;
 `;
 
-const StyledInput = styled(InputItem)`
-  width: 200px;
-  height: 45px;
-  background-color: white;
-  border: 1px solid grey;
-  border-radius: 10px;
-  padding: 5px;
-  margin-top: 25px;
-`;
+
 
 const LinkText = styled.Text`
   text-decoration: underline;
@@ -64,19 +35,27 @@ const LinkText = styled.Text`
 `;
 
 class SignInScreen extends React.Component {
-  
+    static navigationOptions = {
+      mode: 'modal'
+    }
+
     render() {
       return (
         <Container>
-          <InnerContainer enabled behavior="padding">
-          <View style={{ height: 150, width: 150, backgroundColor: 'white'}}></View>
-          <Scroll contentContainerStyle={{justifyContent: 'space-around', alignItems: 'center'}}>
-            <StyledInput last={true} type="text" placeholder="Username"></StyledInput>
-            <StyledInput last={true} type="password" placeholder="Password"></StyledInput>
-          </Scroll>
-          <StyledButton type="primary" onPress={this._signInAsync} >Sign In</StyledButton>
-          <LinkText onPress={this.goToSignUp}>Don't have an account? Sign up</LinkText>
-          </InnerContainer>
+
+          <View style={{ height: 150, width: 150, margin: 10, backgroundColor: 'white'}}></View>
+          <FormContainer enabled={true} behavior="padding">
+              <FormInput style={{ width: '100%'}} 
+                textContentType="none"
+                placeholder="Username"></FormInput>
+              <FormInput style={{ width: '100%' }} 
+                secureTextEntry={true} 
+                textContentType="password" 
+                placeholder="Password"></FormInput>
+            </FormContainer>
+            <CustomButton onPress={this._signInAsync} style={{ width: '100%'}}>Sign In</CustomButton>
+            <LinkText onPress={this.goToSignUp}>Don't have an account? Sign up</LinkText>
+
         </Container>
       );
     }
