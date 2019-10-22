@@ -6,7 +6,6 @@ const Button = styled.TouchableOpacity`
   height: 50px;
   border-radius: 10px;
   background-color: ${props => props.theme.secondaryColor};
-  border: 1px solid white;
   color: white;
   align-items: center;
   justify-content: center;

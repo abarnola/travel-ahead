@@ -1,17 +1,19 @@
 export default {
-    primaryColor: "#F4DC87",
+    primaryColor: "#bac2c2",//"#e84adb",//#F4DC87",
     primaryDark: "#f2f2f2",
     primaryLight: "white",
-    secondaryColor: "#4BA0DD",
+    secondaryColor: "#f7bb36",// "#f7b119",//"#4BA0DD",
     secondaryLight: "#",
-    secondaryDark: "#a0a0a0",
+    secondaryDark: "#8a6619",
     lightText: "white",
     darkText: "black",
     subText: "#",
-    pageColor: "#",
+    pageColor: "#DEE5E5",
     primaryFont: "'Lato', sans-serif",
     secondaryFont: "'Comfortaa', cursive",
-    hover: "#B9DFFA"
+    hover: "#B9DFFA",
+    active: '#bac2c2',
+    inactive: 'black',
 }
 
 //F4DC87

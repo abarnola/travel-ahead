@@ -11,7 +11,8 @@ import TripsScreen from '../screens/TripsScreen';
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs'
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import SideMenu from '../components/SideMenu';
-import { View, Text, Button, Dimensions} from 'react-native';
+import { View, Text, Button, Dimensions, Platform} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 //Testing
 
@@ -39,37 +40,68 @@ const SettingsScreen = () => {
 }
 //
 const BottomTabs = (props) => {
-  console.log(props);
+  props.tintColor = 'white';
   return (
     <BottomTabBar {...props} style={{ 
       borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
-      backgroundColor: props.theme.primaryColor
+      borderTopRightRadius: 10
      }} />
   )
 }
 const TabNavigator = createBottomTabNavigator({
   Trips: {
-    screen: TripsScreen
+    screen: TripsScreen,
+    navigationOptions: { //TINT COLOR is set with activeTintColor
+      tabBarIcon: ({ tintColor, focused }) => (
+        //<MaterialIcons size={32} name={ Platform.OS === 'ios' ? (focused ? 'ios-home' : 'ios-home-outline') : 'md-home' } style={{ color: tintColor }} />
+        <MaterialIcons size={32} name={ Platform.OS === 'ios' ? 'flight-takeoff' : 'flight-takeoff' } style={{ color: tintColor }} />
+      )
+    }
   },
   Search: {
-    screen: SearchScreen
+    screen: SearchScreen,
+    navigationOptions: { 
+      tabBarIcon: ({ tintColor, focused }) => (
+        //<MaterialIcons size={32} name={ Platform.OS === 'ios' ? (focused ? 'ios-home' : 'ios-home-outline') : 'md-home' } style={{ color: tintColor }} />
+        <MaterialIcons size={32} name={ Platform.OS === 'ios' ? 'search' : 'search' } style={{ color: tintColor }} />
+      )
+    }
   },
   AddTrip: {
-    screen: AddTripScreen
+    screen: AddTripScreen,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, focused }) => (
+        //<MaterialIcons size={32} name={ Platform.OS === 'ios' ? (focused ? 'ios-home' : 'ios-home-outline') : 'md-home' } style={{ color: tintColor }} />
+        <MaterialIcons size={32} name={ Platform.OS === 'ios' ? 'add' : 'add' } style={{ color: tintColor }} />
+      )
+    }
   },
   Notifications: {
-    screen: NotificationsScreen
+    screen: NotificationsScreen,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, focused }) => (
+        <MaterialIcons size={32} name={ Platform.OS === 'ios' ? 'notifications' : 'notifications' } style={{ color: tintColor }} />
+      )
+    }
   },
   Profile: {
-    screen: ProfileScreen
+    screen: ProfileScreen,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, focused }) => (
+        //<MaterialIcons size={32} name={ Platform.OS === 'ios' ? (focused ? 'ios-home' : 'ios-home-outline') : 'md-home' } style={{ color: tintColor }} />
+        <MaterialIcons size={32} name={ Platform.OS === 'ios' ? 'person' : 'person' } style={{ color: tintColor }} />
+      )
+    }
   },
 }, 
 {
   initialRouteName: 'Trips',
-  /*tabBarComponent: (props) => (
-    <BottomTabs {...props} ></BottomTabs>
-  ),*/
+  /*tabBarComponent: (props) => {
+    props.tintColor = 'red'
+    return (
+      <BottomTabs {...props} ></BottomTabs>
+    )
+  },*/
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state.routes[navigation.state.index];
     return {
@@ -84,6 +116,9 @@ const TabNavigator = createBottomTabNavigator({
         style: {
           backgroundColor: screenProps.theme.primaryColor,
         },
+        activeTintColor: screenProps.theme.secondaryColor,
+        inactiveTintColor: screenProps.theme.secondaryDark,
+        showLabel: false
       }
     };
   }
