@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Image } from 'react-native'
+import { Text, View, Image, TouchableOpacity, TouchableHighlight} from 'react-native'
 import styled from 'styled-components'
 
 const Container = styled.View`
@@ -24,8 +24,7 @@ const Divider = styled.View`
 `;
 
 const RowButton = styled.View`
-  flex-direction: row;
-  align-items: center; 
+  align-items: stretch;
   margin-top: 10px;
 `;
 
@@ -34,6 +33,15 @@ const Username = styled.Text`
   margin: 5px;  
 `;
 
+const RowText = styled.Text`
+  font-size: 14px;
+  font-weight: bold;  
+`;
+
+const Row = styled.TouchableOpacity`
+  align-items: stretch;
+  padding: 10px;
+`;
 class SideMenu extends React.Component {
 
   _signOutAsync = async () => {
@@ -50,21 +58,27 @@ class SideMenu extends React.Component {
         <Username>{/*this.props.user.username*/}Username</Username>
         <Divider></Divider>
 
-        <View style={{ width: '100%' }}>
+        <View style={{ width: '100%', height: '100%' }}>
           <RowButton>
             <Image source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2018/08/social.jpg' }}/>
-            <Text> First Activity </Text>
+            <Row onPress={() => console.log('1')}>
+                <RowText>1</RowText>
+            </Row>
           </RowButton>
 
           <RowButton>
             <Image source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2018/08/promotions.jpg' }}/>
-            <Text > Second Activity </Text>
+            <Row onPress={() => console.log('2')}>
+                <RowText>2</RowText>
+            </Row>
           </RowButton>
 
-          <RowButton >
+          <RowButton>
             <Image source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2018/08/outbox.jpg' }}
             />
-            <Text onPress={this._signOutAsync}>Logout</Text>
+            <Row onPress={this._signOutAsync}>
+                  <RowText>Logout</RowText>
+            </Row>
           </RowButton>
 
         </View>
