@@ -8,7 +8,6 @@ import {
   ScrollView
 } from 'react-native';
 import styled from 'styled-components';
-import { List, InputItem } from '@ant-design/react-native';
 import CustomButton from '../components/CustomButton'
 
 const Container = styled.View`
@@ -48,12 +47,6 @@ class ProfileScreen extends React.Component {
             <Avatar>
                 <Text>Avatar</Text>
             </Avatar>
-            <List>
-                <InputItem type="text" placeholder="Input"></InputItem>
-                <InputItem type="text" placeholder="Input"></InputItem>
-                <InputItem type="text" placeholder="Input"></InputItem>
-                <InputItem type="text" placeholder="Input"></InputItem>
-            </List>
             <CustomButton>Text</CustomButton>
             </InnerContainer>
         </Container>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   AsyncStorage,
   SafeAreaView,
@@ -11,6 +11,7 @@ import {
 import styled from 'styled-components';
 import CustomButton from '../../components/CustomButton';
 import FormInput from '../../components/FormInput';
+import {signUp} from '../../services/auth.service';
 
 const Container = styled.KeyboardAvoidingView`
   padding: 25px;
@@ -36,41 +37,67 @@ const LinkText = styled.Text`
   font-size: 16px;
 `;
 
-class SignUpScreen extends React.Component {
-  
-    render() {
-      return (
-        <Container enabled behavior={Platform.OS === "ios" ? "padding" : null}>
-          <FormContainer>
-          <View style={{ height: 150, width: 150, margin: 10, backgroundColor: 'white'}}></View>
-          
-              <FormInput style={{ width: '100%'}} 
-                textContentType="none"
-                placeholder="Username"></FormInput>
-              <FormInput style={{ width: '100%' }} 
-                secureTextEntry={true} 
-                textContentType="password" 
-                placeholder="Password"></FormInput>
-              <FormInput style={{ width: '100%' }} 
-                secureTextEntry={true} 
-                textContentType="password" 
-                placeholder="Confirm Password"></FormInput>
+const SignUpScreen = (props) => {
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
-              <CustomButton onPress={this._signUpAsync} style={{ width: '100%'}}>Sign Up</CustomButton>
-              <LinkText onPress={this.goToSignIn}>Already have an account? Sign in</LinkText>
-              <View style={{ flex : 1 }} />
-            </FormContainer>
-        </Container>
-      );
-    }
     goToSignIn = async () => {
-        this.props.navigation.navigate('SignIn');
+      props.navigation.navigate('SignIn');
     }
     _signUpAsync = async () => {
+      signUp({
+        email,
+        username,
+        password,
+        confirmPassword
+      })
+      .then(res => {
+        console.log(res);
+        props.navigation.navigate('Home');
+      })
+      .catch(err => {
+        console.dir(err)
+      })
         //await AsyncStorage.setItem('userToken', 'abc');
         //Create user then sign in with that user
-        this.props.navigation.navigate('SignIn');
     };
+    return (
+      <Container enabled behavior={Platform.OS === "ios" ? "padding" : null}>
+        <FormContainer>
+        <View style={{ height: 150, width: 150, margin: 10, backgroundColor: 'white'}}></View>
+        
+            <FormInput style={{ width: '100%'}} 
+              textContentType="none"
+              placeholder="Email"
+              onChangeText={(val) => setEmail(val)}
+              value={email}></FormInput>
+            <FormInput style={{ width: '100%'}} 
+              textContentType="none"
+              placeholder="Username"
+              onChangeText={(val) => setUsername(val)}
+              value={username}></FormInput>
+            <FormInput style={{ width: '100%' }} 
+              secureTextEntry={true} 
+              textContentType="password" 
+              placeholder="Password"
+              onChangeText={(val) => setPassword(val)}
+              value={password}></FormInput>
+            <FormInput style={{ width: '100%' }} 
+              secureTextEntry={true} 
+              textContentType="password" 
+              placeholder="Confirm Password"
+              onChangeText={(val) => setConfirmPassword(val)}
+              value={confirmPassword}></FormInput>
+
+            <CustomButton onPress={_signUpAsync} style={{ width: '100%'}}>Sign Up</CustomButton>
+            <LinkText onPress={goToSignIn}>Already have an account? Sign in</LinkText>
+            <View style={{ flex : 1 }} />
+          </FormContainer>
+      </Container>
+    );
+    
 }
   
 export default SignUpScreen;

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { InputItem } from '@ant-design/react-native';
 import { TextInput } from 'react-native';
 
 const StyledInput = styled(TextInput)`

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { View, Text, Animated } from 'react-native';
-import { Card } from '@ant-design/react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { RectButton } from 'react-native-gesture-handler'
 

@@ -1,7 +1,18 @@
 import React from 'react'
 import styled, {withTheme} from 'styled-components'
-import { Button, Text, View, AsyncStorage, SafeAreaView } from 'react-native'
+import { Button, Text, View, AsyncStorage, SafeAreaView, ScrollView } from 'react-native'
 import Trip from '../components/Trip';
+
+const Container = styled.SafeAreaView`
+  width: 100%;
+  height: 100%;
+`;
+
+const Scroll = styled.ScrollView`
+  flex: 1;
+  padding: 15px 15px;
+  padding-bottom: 25px;
+`;
 
 const TripsScreen = (props) => {
     const clickTrip = (trip) => {
@@ -24,8 +35,14 @@ const TripsScreen = (props) => {
     }*/
 
     return (
-      <SafeAreaView style={{}}>
-      </SafeAreaView>
+      <Container>
+        <Scroll>
+          <Trip></Trip>
+          <Trip></Trip>
+          <Trip></Trip>
+          <Trip></Trip>
+        </Scroll>
+      </Container>
     );
 }
 

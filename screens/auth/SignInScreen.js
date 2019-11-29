@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   AsyncStorage,
   SafeAreaView,
@@ -11,6 +11,7 @@ import {
 import styled from 'styled-components';
 import CustomButton from '../../components/CustomButton';
 import FormInput from '../../components/FormInput';
+import {signIn, sign} from '../../services/auth.service'
 
 const Container = styled.View`
   padding: 25px;
@@ -36,40 +37,52 @@ const LinkText = styled.Text`
   font-size: 16px;
 `;
 
-class SignInScreen extends React.Component {
-    static navigationOptions = {
-      mode: 'modal'
-    }
+const SignInScreen = (props) => {
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    render() {
+    const goToSignUp = async () => {
+      props.navigation.navigate('SignUp');
+    };
+
+    const _signInAsync = async () => {
+      signIn({email: email, password: password})
+      .then(res => {
+        console.log(res)
+        AsyncStorage.setItem('userToken', res.token);
+        props.navigation.navigate('Home');
+      })
+      .catch(err => console.log(err));
+    };
+
       return (
         <Container enabled behavior={Platform.OS === "ios" ? "padding" : null}>
           <FormContainer>
           <View style={{ height: 150, width: 150, margin: 10, backgroundColor: 'white'}}></View>
               <FormInput style={{ width: '100%'}} 
                 textContentType="none"
-                placeholder="Username"></FormInput>
+                placeholder="Email"
+                onChangeText={(val) => setEmail(val)}
+                value={email}></FormInput>
               <FormInput style={{ width: '100%' }} 
                 secureTextEntry={true} 
                 textContentType="password" 
-                placeholder="Password"></FormInput>
+                placeholder="Password"
+                onChangeText={(val) => setPassword(val)}
+                value={password}></FormInput>
            
-            <CustomButton onPress={this._signInAsync} style={{ width: '100%'}}>Sign In</CustomButton>
-            <LinkText onPress={this.goToSignUp}>Don't have an account? Sign up</LinkText>
+            <CustomButton onPress={_signInAsync} style={{ width: '100%'}}>Sign In</CustomButton>
+            <LinkText onPress={goToSignUp}>Don't have an account? Sign up</LinkText>
             <View style={{ flex : 1 }} />
             </FormContainer>
         </Container>
       );
-    }
 
-    goToSignUp = async () => {
-      this.props.navigation.navigate('SignUp');
-    };
+}
 
-    _signInAsync = async () => {
-      //await AsyncStorage.setItem('userToken', 'abc');
-      this.props.navigation.navigate('Home');
-    };
+SignInScreen.navigationOptions = {
+  mode: 'modal'
 }
   
 export default SignInScreen;
